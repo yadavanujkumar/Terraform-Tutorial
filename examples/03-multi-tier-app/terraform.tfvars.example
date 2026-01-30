@@ -1,0 +1,14 @@
+# Example variable values
+# Copy this file to terraform.tfvars and customize as needed
+# cp terraform.tfvars.example terraform.tfvars
+
+aws_region           = "us-east-1"
+project_name         = "my-multitier-app"
+environment          = "dev"
+instance_type        = "t2.micro"
+instance_count       = 2
+
+# VPC Configuration
+vpc_cidr             = "10.0.0.0/16"
+public_subnet_cidrs  = ["10.0.1.0/24", "10.0.2.0/24"]
+private_subnet_cidrs = ["10.0.11.0/24", "10.0.12.0/24"]
