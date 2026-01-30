@@ -34,6 +34,6 @@ output "web_url" {
 }
 
 output "ssh_command" {
-  description = "SSH command to connect to the instance"
-  value       = "ssh -i your-key.pem ec2-user@${aws_instance.web.public_ip}"
+  description = "SSH command template to connect to the instance (requires key pair configuration)"
+  value       = "ssh -i /path/to/your-key.pem ec2-user@${aws_instance.web.public_ip} # Note: Requires key_name to be configured in main.tf"
 }

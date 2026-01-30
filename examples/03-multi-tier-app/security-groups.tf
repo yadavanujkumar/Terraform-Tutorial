@@ -51,7 +51,8 @@ resource "aws_security_group" "web" {
     security_groups = [aws_security_group.alb.id]
   }
   
-  # Allow SSH from within VPC (for troubleshooting via SSM)
+  # Allow SSH from within VPC (for troubleshooting via bastion host)
+  # Note: For SSM Session Manager access, add an IAM role with AmazonSSMManagedInstanceCore policy
   ingress {
     description = "SSH from VPC"
     from_port   = 22

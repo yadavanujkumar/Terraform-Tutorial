@@ -146,11 +146,14 @@ This takes 5-10 minutes. Confirm with `yes`.
 ## Cost Estimate
 
 **Monthly costs** (approximate):
-- NAT Gateway: ~$32/month + data transfer
+- NAT Gateway: ~$32/month + data transfer charges
 - Application Load Balancer: ~$16/month + LCU charges
-- EC2 t2.micro instances (2): ~$17/month (not free tier eligible in private subnet with NAT)
+- EC2 t2.micro instances (2): Free tier eligible for first 12 months (750 hours/month), otherwise ~$8.50/month each
+- Data transfer: ~$5-10/month (varies with usage)
 
-**Total**: ~$65-80/month if left running
+**Total**: ~$53-75/month (after free tier) or ~$65-85/month with EC2 charges
+
+**Free Tier Note**: T2.micro instances are free tier eligible (750 hours/month for 12 months), but NAT Gateway and ALB are not.
 
 **Development tip**: Use `terraform destroy` after testing to minimize costs.
 
@@ -184,7 +187,9 @@ Allows private subnet resources to access internet (for updates, etc.) without b
 1. **Web servers in private subnets**: Not directly accessible from internet
 2. **ALB in public subnet**: Only entry point for traffic
 3. **Security group rules**: Strict access control
-4. **No SSH keys required**: Using SSM Session Manager (optional)
+4. **SSH access**: Restricted to VPC CIDR (for bastion host access)
+
+**Note on SSM Session Manager**: To enable AWS Systems Manager Session Manager for secure access to instances without SSH keys, you would need to add an IAM role with the `AmazonSSMManagedInstanceCore` policy to the EC2 instances. This is not included in this basic example but is recommended for production use.
 
 ## Customization Ideas
 

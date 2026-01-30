@@ -23,9 +23,10 @@ locals {
               systemctl start httpd
               systemctl enable httpd
               
-              # Get instance metadata
-              INSTANCE_ID=$(ec2-metadata --instance-id | cut -d ' ' -f 2)
-              AVAILABILITY_ZONE=$(ec2-metadata --availability-zone | cut -d ' ' -f 2)
+              # Get instance metadata using IMDSv2 (more secure)
+              TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+              INSTANCE_ID=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/instance-id)
+              AVAILABILITY_ZONE=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/placement/availability-zone)
               
               # Create a simple web page
               cat > /var/www/html/index.html <<HTML

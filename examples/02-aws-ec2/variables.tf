@@ -27,15 +27,15 @@ variable "instance_type" {
   default     = "t2.micro"
   
   validation {
-    condition     = can(regex("^t[2-3]\\.(micro|small|medium)$", var.instance_type))
-    error_message = "Instance type must be a t2 or t3 instance (micro, small, or medium)."
+    condition     = can(regex("^t[2-4][g]?\\.(micro|small|medium)$", var.instance_type))
+    error_message = "Instance type must be a t2, t3, or t4g instance (micro, small, or medium)."
   }
 }
 
 variable "allowed_ssh_cidr" {
-  description = "CIDR blocks allowed to SSH into the instance"
+  description = "CIDR blocks allowed to SSH into the instance. SECURITY WARNING: Default allows access from anywhere. Restrict to your IP in production!"
   type        = list(string)
-  default     = ["0.0.0.0/0"]  # WARNING: Open to all IPs. Restrict in production!
+  default     = ["0.0.0.0/0"]  # WARNING: Open to all IPs. Change to your IP address (e.g., ["YOUR_IP/32"])
 }
 
 # Uncomment if you want to use an existing key pair for SSH access
