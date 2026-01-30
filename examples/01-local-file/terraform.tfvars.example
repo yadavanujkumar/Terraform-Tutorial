@@ -1,0 +1,7 @@
+# Example variable values
+# Copy this file to terraform.tfvars and customize as needed
+# cp terraform.tfvars.example terraform.tfvars
+
+project_name    = "my-terraform-project"
+environment     = "dev"
+welcome_message = "Hello from Terraform! You're learning Infrastructure as Code."

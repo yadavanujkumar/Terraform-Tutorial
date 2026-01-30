@@ -1,0 +1,16 @@
+# Example variable values
+# Copy this file to terraform.tfvars and customize as needed
+# cp terraform.tfvars.example terraform.tfvars
+
+aws_region      = "us-east-1"
+project_name    = "my-aws-project"
+environment     = "dev"
+instance_type   = "t2.micro"
+
+# Restrict SSH access to your IP for better security
+# Find your IP: curl ifconfig.me
+# allowed_ssh_cidr = ["YOUR_IP/32"]
+allowed_ssh_cidr = ["0.0.0.0/0"]
+
+# Uncomment and set if you want SSH access with a key pair
+# key_name = "your-key-pair-name"
